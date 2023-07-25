@@ -1,30 +1,28 @@
-const subtrair = document.querySelector("#subtrair");
-const somar = document.querySelector("#somar");
-const braco = document.querySelector("#braco")
-
-const controle = document.querySelectorAll(".controle-ajuste")
+//buscando pelo data atribute.
+const controle = document.querySelectorAll("[data-controle]")
 
 //criando um evento para todos os elementos via foreach. 
 //O forEach() é muito simples de ser utilizado, toda vez ele é usado temos um elemento e um índice
 //O elemento é aquilo que foi clicado e o índice é o indíce do array. Então controle.forEach() faz algo.
 controle.forEach((elemento) => {
     elemento.addEventListener("click", (evento) => {
-        console.log(evento.target.textContent)
+        //aqui está sendo passado dois parametros. O texto html onde iremos puxar pelo - e o parentNode, onde vai pegar o elemento pai.
+       manipulaDados (evento.target.dataset.controle, evento.target.parentNode)
     })
 
 } )
 
 
 
-somar.addEventListener("click",()  => {manipulaDados("somar")});
+// Na função manipula dados, passamos a operação e o controle cujo vai ser necessário da classe pai para que não procure no documento todo, e sim em cada elemento pai.
 
-subtrair.addEventListener("click",()  => {manipulaDados("subtrair")});
+function manipulaDados(operacao, controle) {
+const peca = controle.querySelector("[data-contador]")
 
-
-function manipulaDados(operacao) {
-    if(operacao === "subtrair"){
-        braco.value = parseInt(braco.value) - 1
+    if(operacao === "-"){
+        peca.value = parseInt(peca.value) - 1
         
-    } else braco.value = parseInt(braco.value) + 1
-    
+    } else {peca.value = parseInt(peca.value) + 1
+    }
 }
+
